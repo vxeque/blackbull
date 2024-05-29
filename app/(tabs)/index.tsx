@@ -1,70 +1,105 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  Animated,
+} from "react-native";
+import { Link } from "expo-router";
+// import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { ThemedText } from "@/components/ThemedText";
 
 export default function HomeScreen() {
+  // const URL_API = `https://${urlApi()}`;
+
+  function elegirCanasta() {}
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <ThemedText type="title" style={{ marginBottom: 50 }}>
+        BlackBull
+      </ThemedText>
+
+      <TextInput
+        style={styles.TextInputAddress}
+        placeholder="📍Agregar ubicación"
+      />
+
+      <TextInput
+        style={[styles.TextInputAddress, styles.TextSearchProduts]}
+        placeholder="🔍 Buscar productos"
+      />
+
+      <Text style={styles.text}></Text>
+
+      <View style={styles.botonesOpcionesView}>
+          <TouchableOpacity style={[styles.opcionBoton]}>
+        <Link href="/basket" style={{backgroundColor:'#101010'}}>
+            <FontAwesome5 name="shopping-basket" size={35} color="white" />
+            <Text style={{ fontSize: 15, color: "white" }}>Comprar</Text>
+        </Link>
+          </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    // width: "auto",
+
+    // height: "100%",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  text: {
+    fontSize: 20,
+    color: "black",
+    marginTop: "20%",
+    marginBottom: 10,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+
+  TextInputAddress: {
+    width: 250,
+    height: 35,
+    textAlign: "center",
+    borderColor: "white",
+    borderRadius: 5,
+    padding: 8,
+    backgroundColor: "#D1D1D1",
+  },
+  TextSearchProduts: {
+    marginTop: 40,
+  },
+  ImgUser: {
+    width: 45,
+    height: 45,
+    borderRadius: 75,
+    marginTop: 0,
+    alignItems: "flex-start",
+    marginRight: 250,
+  },
+  botonesOpcionesView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    // backgroundColor: "",
+    // height:200
+  },
+
+  opcionBoton: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 200,
+    height: 100,
+    margin: 10,
+    borderRadius: 15,
+    overflow: "hidden",
+    backgroundColor: "#202020",
   },
 });
